@@ -1,0 +1,11 @@
+streamlit
+openai
+matplotlib
+scikit-image
+python-dotenv
+langchain
+qdrant_client
+pypdf
+langchain-community
+langchain-openai
+langchain-qdrant
