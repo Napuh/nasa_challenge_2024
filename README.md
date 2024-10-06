@@ -7,7 +7,7 @@ Aeroforest.py team deliverables for NASA International Space Apps Challenge 2024
 A brief showcase of the app:
 
 <video width="600" controls>
-  <source src="static/showcase.mp4" type="video/mp4">
+  <source src="https://github.com/Napuh/nasa_challenge_2024/raw/f89ae341af3da9d8df383a0725ffdf6fa67c1353/static/showcase.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
