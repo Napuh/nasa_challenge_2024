@@ -2,7 +2,6 @@ import streamlit as st
 
 
 def apply_css_fixes():
-
     st.markdown(
         """
     <style>
@@ -38,7 +37,6 @@ def apply_css_fixes():
         """,
         unsafe_allow_html=True,
     )
-
 
     hide_streamlit_style = """
                 <style>

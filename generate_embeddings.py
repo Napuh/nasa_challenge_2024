@@ -45,7 +45,8 @@ def ingest_documents(folder_path, collection_name):
 
             # Split documents into chunks
             text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000, chunk_overlap=200,
+                chunk_size=1000,
+                chunk_overlap=200,
             )
             chunks = text_splitter.split_documents(documents)
 
@@ -58,7 +59,9 @@ if __name__ == "__main__":
         description="Ingest PDF documents and upload embeddings to Qdrant.",
     )
     parser.add_argument(
-        "folder", type=str, help="Path to the folder containing PDF files.",
+        "folder",
+        type=str,
+        help="Path to the folder containing PDF files.",
     )
     parser.add_argument("collection", type=str, help="Name of the Qdrant collection.")
     args = parser.parse_args()

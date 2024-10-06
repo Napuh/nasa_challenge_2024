@@ -14,7 +14,10 @@ class simpleLLM:
         self.model = model
 
     def generate_completion(
-        self, system_message, messages: List[dict], streaming=False,
+        self,
+        system_message,
+        messages: List[dict],
+        streaming=False,
     ):
         system_message = [{"role": "system", "content": system_message}]
 
@@ -35,7 +38,9 @@ class simpleLLM:
 
         else:
             completion = self.client.chat.completions.create(
-                model=self.model, messages=messages_to_send, temperature=0.1,
+                model=self.model,
+                messages=messages_to_send,
+                temperature=0.1,
             )
 
             return completion.choices[0].message.content

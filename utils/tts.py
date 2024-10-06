@@ -9,7 +9,7 @@ class TextToSpeech:
         self.model = model
         self.voice = voice
 
-    def generate_speech(self, text, file_path= None):
+    def generate_speech(self, text, file_path=None):
         if not file_path:
             file_path = Path(__file__).parent / "speech.mp3"
 
@@ -21,4 +21,3 @@ class TextToSpeech:
         )
         response.write_to_file(file_path)
         return file_path
-

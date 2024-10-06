@@ -18,7 +18,9 @@ load_dotenv()
 
 ###### CONFIGURE SESSION_STATE
 if "embeddings_client" not in st.session_state:
-    st.session_state["embeddings_client"] = OpenAIEmbeddings(model="text-embedding-3-large")
+    st.session_state["embeddings_client"] = OpenAIEmbeddings(
+        model="text-embedding-3-large"
+    )
 if "qdrant_client" not in st.session_state:
     st.session_state["qdrant_client"] = QdrantClient(host="localhost", port=6333)
 # Initialize chat history
@@ -53,7 +55,9 @@ for message in st.session_state.messages:
                 end_idx = message_to_show.find("]]]")
                 filename = message_to_show[start_idx:end_idx].strip()
                 image_html = f"\n{img_to_html(f'static/{filename}')}\n"
-                message_to_show = message_to_show.replace(f"[[[{filename}]]]", image_html)
+                message_to_show = message_to_show.replace(
+                    f"[[[{filename}]]]", image_html
+                )
 
             st.markdown(message_to_show, unsafe_allow_html=True)
 
@@ -89,8 +93,7 @@ if prompt := st.chat_input("Escribe tu mensaje"):
             full_response += response or ""
 
             message_placeholder.markdown(
-                full_response
-                + "🌎",
+                full_response + "🌎",
             )
 
         message_to_show = full_response
@@ -99,7 +102,7 @@ if prompt := st.chat_input("Escribe tu mensaje"):
         end_idx = message_to_show.find("]]]")
 
         while start_idx != -1 and end_idx != -1:
-            filename = message_to_show[start_idx + 3:end_idx].strip()
+            filename = message_to_show[start_idx + 3 : end_idx].strip()
             image_html = f"<br>{img_to_html(f'static/{filename}')}<br>"
             message_to_show = message_to_show.replace(f"[[[{filename}]]]", image_html)
 

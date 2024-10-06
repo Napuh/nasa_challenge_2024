@@ -24,22 +24,29 @@ def autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 
-st.set_page_config(page_title="GA.IA", initial_sidebar_state="collapsed", page_icon="🌎")
+
+st.set_page_config(
+    page_title="GA.IA", initial_sidebar_state="collapsed", page_icon="🌎"
+)
 
 apply_css_fixes()
 load_dotenv()
 
+
 def char_streamer(text, delay=0.05):
     for char in text:
         if char == "&":
-            time.sleep(delay*10)
+            time.sleep(delay * 10)
         else:
             yield char
             time.sleep(delay)
 
+
 ###### CONFIGURE SESSION_STATE
 if "embeddings_client" not in st.session_state:
-    st.session_state["embeddings_client"] = OpenAIEmbeddings(model="text-embedding-3-large")
+    st.session_state["embeddings_client"] = OpenAIEmbeddings(
+        model="text-embedding-3-large"
+    )
 if "qdrant_client" not in st.session_state:
     st.session_state["qdrant_client"] = QdrantClient(host="localhost", port=6333)
 if "collection_to_ask" not in st.session_state:
@@ -49,18 +56,22 @@ if "intro_shown" not in st.session_state:
     st.session_state["intro_shown"] = False
 
 if not st.session_state["intro_shown"]:
-    st.write_stream(char_streamer("# **GA.IA**", delay=0.1))  # Slower delay for GAIA title
+    st.write_stream(
+        char_streamer("# **GA.IA**", delay=0.1)
+    )  # Slower delay for GAIA title
     st.write_stream(char_streamer(intro_text))
     st.session_state["intro_shown"] = True
 else:
     st.write("# **GA.IA**")
     st.write(intro_text.replace("&", ""))
 
-st.link_button(label="Access CO₂ Concentrations Data", url="https://earth.gov/ghgcenter/data-catalog/noaa-gggrn-co2-concentrations")
+st.link_button(
+    label="Access CO₂ Concentrations Data",
+    url="https://earth.gov/ghgcenter/data-catalog/noaa-gggrn-co2-concentrations",
+)
 
 if not st.session_state["intro_shown"]:
     time.sleep(2)
-
 
 
 if not st.session_state["intro_shown"]:

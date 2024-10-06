@@ -1,4 +1,3 @@
-import base64
 import time
 from typing import List
 
@@ -15,33 +14,21 @@ from utils.css_fixes import apply_css_fixes
 from utils.images import img_to_html
 from utils.llm import simpleLLM
 
-
-def autoplay_audio(file_path: str):
-    print(f"autoplay_audio function called at: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}")
-    if not st.session_state["intro_shown"]:
-        with open(file_path, "rb") as f:
-            data = f.read()
-            b64 = base64.b64encode(data).decode()
-            md = f"""
-                <audio autoplay="true" loop="false" style="display:none;">
-                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-                </audio>
-                """
-            st.markdown(
-                md,
-                unsafe_allow_html=True,
-            )
-
-def nuke_autoplay():
-    md = """
-        <audio autoplay="false" style="display:none;">
-        </audio>
-        """
-    st.markdown(
-        md,
-        unsafe_allow_html=True,
-    )
-    print("Autoplay has been nuked.")
+# def autoplay_audio(file_path: str):
+#     print(f"autoplay_audio function called at: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}")
+#     if not st.session_state["intro_shown"]:
+#         with open(file_path, "rb") as f:
+#             data = f.read()
+#             b64 = base64.b64encode(data).decode()
+#             md = f"""
+#                 <audio autoplay="true" loop="false" style="display:none;">
+#                 <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+#                 </audio>
+#                 """
+#             st.markdown(
+#                 md,
+#                 unsafe_allow_html=True,
+#             )
 
 
 def char_streamer(text, delay=0.048):
@@ -54,7 +41,8 @@ def char_streamer(text, delay=0.048):
 
 
 st.set_page_config(
-    page_title="Increase in Global Temperature", initial_sidebar_state="collapsed",
+    page_title="Increase in Global Temperature",
+    initial_sidebar_state="collapsed",
 )
 apply_css_fixes()
 load_dotenv()
@@ -78,8 +66,8 @@ if "messages" not in st.session_state:
     st.session_state["intro_shown"] = False
 st.session_state["collection_to_ask"] = "aumento_temperatura"
 
-if not st.session_state["intro_shown"]:
-    autoplay_audio("static/audio_intro_rising_temperatures.mp3")
+# if not st.session_state["intro_shown"]:
+#     autoplay_audio("static/audio_intro_rising_temperatures.mp3")
 
 vector_store = QdrantVectorStore(
     client=st.session_state["qdrant_client"],
@@ -110,7 +98,8 @@ for idx, message in enumerate(st.session_state.messages):
                 filename = message_to_show[start_idx:end_idx].strip()
                 image_html = f"\n{img_to_html(f'static/{filename}')}\n"
                 message_to_show = message_to_show.replace(
-                    f"[[[{filename}]]]", image_html,
+                    f"[[[{filename}]]]",
+                    image_html,
                 )
 
             if idx < len(introductory_messages) and not st.session_state["intro_shown"]:
@@ -118,7 +107,6 @@ for idx, message in enumerate(st.session_state.messages):
                 time.sleep(1)
                 if idx == len(introductory_messages) - 1:
                     st.session_state["intro_shown"] = True
-                    nuke_autoplay()
             else:
                 st.markdown(message_to_show, unsafe_allow_html=True)
 

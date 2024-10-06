@@ -4,7 +4,9 @@ import streamlit as st
 
 from utils.css_fixes import apply_css_fixes
 
-st.set_page_config(page_title="GA.IA - Climate AI", initial_sidebar_state="collapsed", layout="wide")
+st.set_page_config(
+    page_title="GA.IA - Climate AI", initial_sidebar_state="collapsed", layout="wide"
+)
 apply_css_fixes()
 
 # Apply custom CSS to remove padding
