@@ -6,7 +6,9 @@ Aeroforest.py team deliverables for NASA International Space Apps Challenge 2024
 
 A brief showcase of the app:
 
-https://github.com/Napuh/nasa_challenge_2024/raw/f89ae341af3da9d8df383a0725ffdf6fa67c1353/static/showcase.mp4
+
+https://github.com/user-attachments/assets/7c579c7b-1bbf-43ad-bed3-482b28354f6e
+
 
 Streamlit RAG app with curated content from NASA and GHG Center Data. Documents curated by hand and available on the `base_documents` folder.
 
